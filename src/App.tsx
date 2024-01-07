@@ -18,7 +18,13 @@ function App() {
 
     areaSeries.setData([
       { time: '2018-12-22', value: 32.51 },
-      // ... (your data)
+      { value: 0, time: '2018-12-23' },
+      { value: 85, time: '2018-12-24' },
+      { value: 10, time: '2018-12-25' },
+      { value: 20, time: '2018-12-26' }, 
+      { value: 3, time: '2018-12-27' }, 
+      { value: 43, time: '2018-12-28' }, 
+      { value: 41, time: '2018-12-29' }
     ]);
 
     const candlestickSeries = chart.addCandlestickSeries({
@@ -28,7 +34,6 @@ function App() {
       wickUpColor: '#26a69a',
       wickDownColor: '#ef5350',
     });
-
 
 
     candlestickSeries.setData([
@@ -43,11 +48,11 @@ function App() {
       { time: '2018-12-30', open: 106.33, high: 110.20, low: 90.39, close: 98.10 },
       { time: '2018-12-31', open: 109.87, high: 114.69, low: 85.66, close: 111.26 },
     ]);
-
+    console.log('one');
     chart.timeScale().fitContent();
   }, []); // Empty dependency array ensures the effect runs only once after the initial render
 
-  return <div id="container" style={{ width: '100%', height: '400px' }}></div>;
+  return <div id="container" style={{ width: '100%', height: '100vh' }}></div>;
 }
 
 export default App;
