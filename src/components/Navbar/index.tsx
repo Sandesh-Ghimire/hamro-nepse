@@ -117,7 +117,7 @@ const Navbar = ({ logo }: NavbarProp) => {
         </div>
 
         {/* Login Button */}
-        <button className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">
+        <button className="w-full mt-2 px-4 py-2 mb-4 text-white bg-gradient-to-r from-sky-500 via-sky-600 to-sky-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-sky-300 dark:focus:focus:ring-sky-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
           Login / Signup
         </button>
       </div>

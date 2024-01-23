@@ -36,6 +36,7 @@ interface URL{
 const Table = ({fetchURL} : URL) => {
   const [globalFilter, setGlobalFilter] = useState<string>('');
   const [sorting, setSorting] = useState<MRT_SortingState>([]);
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
       
   const {
     data: { products = [] } = {},
@@ -101,6 +102,9 @@ const Table = ({fetchURL} : URL) => {
           children: 'Error loading data',
         }
       : undefined,
+      muiLinearProgressProps: {
+        color: prefersDarkMode ? 'info' : 'primary',
+      },
     onGlobalFilterChange: setGlobalFilter,
     onSortingChange: setSorting,
     renderTopToolbarCustomActions: () => (
@@ -120,7 +124,7 @@ const Table = ({fetchURL} : URL) => {
     },
   });
 
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  
   const theme = createTheme({
     palette: {
       mode: prefersDarkMode ? 'dark' : 'light',

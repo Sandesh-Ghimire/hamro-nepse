@@ -22,7 +22,7 @@ const SubMenu = ({
         <div className="p-1" key={index}>
           <a
             href={subMenuItem.href}
-            className="block text-gray-800 hover:text-blue-500 dark:text-white"
+            className="block text-gray-800 hover:text-sky-600 dark:text-white"
           >
             {subMenuItem.label}
           </a>
