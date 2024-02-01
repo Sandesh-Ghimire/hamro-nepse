@@ -1,4 +1,9 @@
 /**
+ * External dependencies.
+ */
+import { Link } from "react-router-dom";
+
+/**
  * Internal dependencies.
  */
 import { subMenuItems } from "../../constant";
@@ -14,18 +19,17 @@ const SubMenu = ({
 }: SubMenuProps) => {
   return (
     <div
-      className={"absolute w-52 top-10 p-4 bg-white rounded drop-shadow-xl z-10 dark:bg-gray-900 dark:border dark:border-white"}
+      className={
+        "absolute w-52 bg-white dark:bg-gray-900 rounded top-10 p-4 drop-shadow-xl z-10 border border-gray-300 dark:border-gray-600"
+      }
       onMouseOver={handleDropdownMouseOver}
       onMouseOut={handleDropdownMouseOut}
     >
       {subMenuItems.map((subMenuItem, index) => (
         <div className="p-1" key={index}>
-          <a
-            href={subMenuItem.href}
-            className="block text-gray-800 hover:text-sky-600 dark:text-white"
-          >
+          <Link to={subMenuItem.href} className="block hover:text-sky-600">
             {subMenuItem.label}
-          </a>
+          </Link>
         </div>
       ))}
     </div>

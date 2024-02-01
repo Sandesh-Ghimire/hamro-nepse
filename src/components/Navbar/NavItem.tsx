@@ -2,6 +2,7 @@
  * External dependencies.
  */
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 /**
  * Internal dependencies.
@@ -9,15 +10,13 @@ import { useState } from "react";
 import SubMenu from "./SubMenu";
 
 interface NavItemProp {
-  navItemDetails: {
-    label: string;
-    href: string;
-    openInNewTab: boolean;
-    hasSubMenu: boolean;
-  };
+  label: string;
+  href: string;
+  openInNewTab: boolean;
+  hasSubMenu: boolean;
 }
 
-const NavItem = ({ navItemDetails }: NavItemProp) => {
+const NavItem = ({ label, href, hasSubMenu }: NavItemProp) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const handleMouseOver = () => {
@@ -44,12 +43,9 @@ const NavItem = ({ navItemDetails }: NavItemProp) => {
       onMouseOut={handleMouseOut}
       onMouseOver={handleMouseOver}
     >
-      <a
-        href={navItemDetails.href}
-        className="text-black hover:text-sky-600 flex items-center dark:text-white"
-      >
-        <span>{navItemDetails.label}</span>
-        {navItemDetails.hasSubMenu && (
+      <Link to={href} className="hover:text-sky-600 flex items-center">
+        <span>{label}</span>
+        {hasSubMenu && (
           <div className="cursor-pointer inline-block">
             <svg
               className="fill-current h-4 w-4 ml-1"
@@ -60,9 +56,9 @@ const NavItem = ({ navItemDetails }: NavItemProp) => {
             </svg>
           </div>
         )}
-      </a>
+      </Link>
 
-      {navItemDetails.hasSubMenu && isDropdownOpen && (
+      {hasSubMenu && isDropdownOpen && (
         <SubMenu
           handleDropdownMouseOver={handleDropdownMouseOver}
           handleDropdownMouseOut={handleDropdownMouseOut}
