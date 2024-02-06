@@ -8,6 +8,7 @@
     "build": "tsc && vite build",
     "start": "npm install && npm run dev",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "branch-naming-check": "branch-naming-check \"^(feat|fix|ref)/.*\"",
     "preview": "vite preview",
     "prepare": "husky install"
   },
@@ -25,7 +26,8 @@
     "material-react-table": "^2.6.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.21.3"
+    "react-router-dom": "^6.21.3",
+    "react-select": "^5.8.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",
@@ -34,6 +36,7 @@
     "@typescript-eslint/parser": "^6.16.0",
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.16",
+    "branch-naming-check": "^1.0.2",
     "eslint": "^8.55.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",

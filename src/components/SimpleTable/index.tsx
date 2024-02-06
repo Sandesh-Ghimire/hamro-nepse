@@ -10,8 +10,7 @@ import {
 
 interface SimpleTableProp {
   data: MRT_RowData[];
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  columns: MRT_ColumnDef<MRT_RowData, any>[];
+  columns: MRT_ColumnDef<MRT_RowData, string>[];
 }
 
 const SimpleTable = ({ data, columns }: SimpleTableProp) => {
@@ -28,6 +27,12 @@ const SimpleTable = ({ data, columns }: SimpleTableProp) => {
     enableDensityToggle: false,
     enableHiding: false,
     enableTopToolbar: false,
+    initialState: {
+      density: "compact",
+    },
+    muiCircularProgressProps: {
+      color: "info",
+    },
   });
 
   return (

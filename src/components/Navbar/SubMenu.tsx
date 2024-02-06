@@ -6,17 +6,26 @@ import { Link } from "react-router-dom";
 /**
  * Internal dependencies.
  */
-import { subMenuItems } from "../../constant";
+import useAppData from "../../useAppData";
 
 interface SubMenuProps {
   handleDropdownMouseOver: () => void;
   handleDropdownMouseOut: () => void;
+  subMenuItems: Record<string, string>[];
 }
 
 const SubMenu = ({
   handleDropdownMouseOver,
   handleDropdownMouseOut,
+  subMenuItems,
 }: SubMenuProps) => {
+  const { setActiveNavItem } = useAppData();
+
+  const handleSubMenuClick = (label: string) => {
+    setActiveNavItem(label);
+    handleDropdownMouseOut();
+  };
+
   return (
     <div
       className={
@@ -27,7 +36,11 @@ const SubMenu = ({
     >
       {subMenuItems.map((subMenuItem, index) => (
         <div className="p-1" key={index}>
-          <Link to={subMenuItem.href} className="block hover:text-sky-600">
+          <Link
+            to={subMenuItem.href}
+            onClick={() => handleSubMenuClick(subMenuItem.label)}
+            className="block hover:text-sky-600"
+          >
             {subMenuItem.label}
           </Link>
         </div>

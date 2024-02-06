@@ -5,16 +5,23 @@ import { AdvanceTable } from "../../components";
 import useMarketWatchPage from "./useMarketWatchPage";
 
 const MarketWatchPage = () => {
-  const { date, columns } = useMarketWatchPage();
+  const { marketDataDate, data, columns, handleExportData } =
+    useMarketWatchPage();
 
   return (
     <>
-      <div className="flex justify-end">
-        <span className="text-sm text-gray-900 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md px-5 py-2 mb-2 dark:text-white">
-          {date}
+      <div className="flex justify-between mb-2">
+        <span className="text-sm py-2 text-gray-900 dark:text-white">
+          Data as of: {marketDataDate}
         </span>
+        <button
+          onClick={handleExportData}
+          className="text-sm px-4 py-2 rounded bg-sky-500 dark:bg-sky-700 text-white dark:text-white"
+        >
+          Download
+        </button>
       </div>
-      <AdvanceTable columns={columns} />
+      <AdvanceTable columns={columns} data={data} />
     </>
   );
 };

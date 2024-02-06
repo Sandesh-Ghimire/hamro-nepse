@@ -1,7 +1,7 @@
 /**
  * External dependencies.
  */
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { Link } from "react-router-dom";
 
 /**
@@ -12,11 +12,18 @@ import SubMenu from "./SubMenu";
 interface NavItemProp {
   label: string;
   href: string;
-  openInNewTab: boolean;
-  hasSubMenu: boolean;
+  subMenuItems: Record<string, string>[];
+  activeNavItem: string;
+  setActiveNavItem: Dispatch<SetStateAction<string>>;
 }
 
-const NavItem = ({ label, href, hasSubMenu }: NavItemProp) => {
+const NavItem = ({
+  label,
+  href,
+  subMenuItems,
+  activeNavItem,
+  setActiveNavItem,
+}: NavItemProp) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const handleMouseOver = () => {
@@ -27,26 +34,26 @@ const NavItem = ({ label, href, hasSubMenu }: NavItemProp) => {
     setIsDropdownOpen(false);
   };
 
-  const handleDropdownMouseOver = () => {
-    // Keep the dropdown open when the mouse is inside the dropdown
-    setIsDropdownOpen(true);
-  };
-
-  const handleDropdownMouseOut = () => {
-    // Close the dropdown when the mouse leaves the dropdown
-    setIsDropdownOpen(false);
-  };
-
   return (
     <div
       className="flex items-center p-3"
       onMouseOut={handleMouseOut}
       onMouseOver={handleMouseOver}
     >
-      <Link to={href} className="hover:text-sky-600 flex items-center">
-        <span>{label}</span>
-        {hasSubMenu && (
-          <div className="cursor-pointer inline-block">
+      <Link
+        to={href}
+        className="hover:text-sky-600 flex items-center"
+        onClick={() => setActiveNavItem(label)}
+      >
+        <span className={activeNavItem === label ? "text-blue-600" : ""}>
+          {label}
+        </span>
+        {subMenuItems.length > 0 && (
+          <div
+            className={`cursor-pointer inline-block ${
+              activeNavItem === label ? "text-blue-600" : ""
+            }`}
+          >
             <svg
               className="fill-current h-4 w-4 ml-1"
               xmlns="http://www.w3.org/2000/svg"
@@ -58,10 +65,11 @@ const NavItem = ({ label, href, hasSubMenu }: NavItemProp) => {
         )}
       </Link>
 
-      {hasSubMenu && isDropdownOpen && (
+      {subMenuItems.length > 0 && isDropdownOpen && (
         <SubMenu
-          handleDropdownMouseOver={handleDropdownMouseOver}
-          handleDropdownMouseOut={handleDropdownMouseOut}
+          handleDropdownMouseOver={handleMouseOver}
+          handleDropdownMouseOut={handleMouseOut}
+          subMenuItems={subMenuItems}
         />
       )}
     </div>

@@ -7,19 +7,17 @@ import { Link } from "react-router-dom";
 /**
  * Internal dependencies.
  */
-import { LoginandSignupItemLink, navItems } from "../../constant";
+import { navItems } from "../../constant";
 import SearchBar from "./SearchBar";
 import NavItem from "./NavItem";
 import {
   LoginAndSignupItem,
   LoginAndSignupItemMobileView,
 } from "./LoginAndSignup";
+import useAppData from "../../useAppData";
 
-interface NavbarProp {
-  logo: string;
-}
-
-const Navbar = ({ logo }: NavbarProp) => {
+const Navbar = () => {
+  const { name, logo, activeNavItem, setActiveNavItem } = useAppData();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -27,17 +25,19 @@ const Navbar = ({ logo }: NavbarProp) => {
   };
 
   return (
-    <div className="pt-6 lg:pt-8">
+    <div className="w-full max-w-screen-xl mx-auto py-3 md:py-4">
       <div className="flex flex-wrap items-center justify-between">
         {/* Logo, Title, and Menu */}
-        <div className="flex items-center">
-          <Link to="/">
-            <img src={logo} alt="Logo" className="h-12 mr-2" />
-          </Link>
-          <Link to="/" className="font-semibold text-xl mr-5 md:mr-5">
-            HamroNepse
-          </Link>
-        </div>
+        <Link
+          to="/"
+          onClick={() => setActiveNavItem("")}
+          className="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse"
+        >
+          <img src={logo} className="h-12" alt="HamroNepse Logo" />
+          <span className="self-center text-xl font-semibold whitespace-nowrap">
+            {name}
+          </span>
+        </Link>
 
         <div className="flex items-center">
           {/* Desktop Menu (Home, Contacts, Features, Chart) */}
@@ -48,8 +48,9 @@ const Navbar = ({ logo }: NavbarProp) => {
                   <NavItem
                     label={navItem.label}
                     href={navItem.href}
-                    hasSubMenu={navItem.hasSubMenu}
-                    openInNewTab={navItem.openInNewTab}
+                    subMenuItems={navItem.subMenuItems}
+                    activeNavItem={activeNavItem}
+                    setActiveNavItem={setActiveNavItem}
                   />
                 </li>
               );
@@ -65,7 +66,7 @@ const Navbar = ({ logo }: NavbarProp) => {
           </div>
 
           {/* Login Button */}
-          <LoginAndSignupItem href={LoginandSignupItemLink.href} />
+          <LoginAndSignupItem href="/login" />
         </div>
 
         {/* Toggle for Mobile Menu  */}
@@ -114,11 +115,11 @@ const Navbar = ({ logo }: NavbarProp) => {
           </div>
 
           {/* Login Button */}
-          <LoginAndSignupItemMobileView href={LoginandSignupItemLink.href} />
+          <LoginAndSignupItemMobileView href="/login" />
         </div>
       </div>
 
-      <hr className="my-6 lg:my-8 sm:mx-auto border-gray-300 dark:border-gray-600" />
+      <hr className="mt-3 lg:my-4 sm:mx-auto border-gray-300 dark:border-gray-600" />
     </div>
   );
 };

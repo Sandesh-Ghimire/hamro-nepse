@@ -1,5 +1,9 @@
+/**
+ * Internal dependencies.
+ */
+import { Contact } from "../../components";
 const ContactPage = () => {
-  return <></>;
+  return <Contact />;
 };
 
 export default ContactPage;
