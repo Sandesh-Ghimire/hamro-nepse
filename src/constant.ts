@@ -48,6 +48,26 @@ export const navItems = [
   },
 ];
 
+
+ export const userProfileDropdownItems = [
+  {
+    label : "Dashboard",
+    href : "/dashbaord",
+  },
+  {
+    label : "Protfolio",
+    href : "/portfolio",
+  },
+  {
+    label : "Settings",
+    href : "/setting",
+  },
+  {
+    label : "Sign out",
+    href : "/signout",
+  },
+ 
+]
 /**
  * API Endpoints.
  */
