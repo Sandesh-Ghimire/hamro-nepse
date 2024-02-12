@@ -165,6 +165,14 @@ const Portfolio = () => {
     createDisplayMode: "modal", //default ('row', and 'custom' are also available)
     editDisplayMode: "modal", //default ('row', 'cell', 'table', and 'custom' are also available)
     enableEditing: true,
+    enablePagination: false,
+    enableSorting: true,
+    enableGlobalFilter: false,
+    enableColumnFilters: false,
+    enableBottomToolbar: false,
+    initialState: {
+      density: "compact",
+    },
     getRowId: (row) => row.symbol,
     muiToolbarAlertBannerProps: isLoadingStocksError
       ? {
